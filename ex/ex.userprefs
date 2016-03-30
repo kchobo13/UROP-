@@ -1,9 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Change POV.js">
     <Files>
-      <File FileName="Assets/Scripts/Change POV.js" Line="28" Column="2" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="44" Column="10" />
+      <File FileName="Assets/Scripts/Change POV.js" Line="12" Column="15" />
+      <File FileName="Assets/Scripts/CameraMove.cs" Line="12" Column="1" />
+      <File FileName="Assets/Scripts/Camera.cs" Line="22" Column="46" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
