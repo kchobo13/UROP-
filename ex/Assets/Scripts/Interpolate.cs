@@ -33,9 +33,11 @@ public class Interpolate : MonoBehaviour
                                                             pointA.transform.position,
                                                             ref velocity,
                                                             smoothTime);
+
                     transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
                                                                    pointA.transform.rotation,
                                                                    Time.deltaTime * speed);
+
                     if ((transform.position - pointA.transform.position).magnitude <= error)
                     {
                         start_smooth = !start_smooth;
@@ -49,10 +51,7 @@ public class Interpolate : MonoBehaviour
                 start_smooth = true;
                 if (start_smooth)
                 {
-                    transform.position = Vector3.SmoothDamp(transform.position,
-                                                            player.transform.position,
-                                                            ref velocity,
-                                                            smoothTime);
+                    transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref velocity, smoothTime);
                     transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
                                                                    player.transform.rotation,
                                                                    Time.deltaTime * speed);
@@ -64,7 +63,15 @@ public class Interpolate : MonoBehaviour
                         switch_cam = !switch_cam;
                     }
                 }
+
             }
+        }
+
+        if (!in_room)
+        {
+            transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
+                                                                   player.transform.rotation,
+                                                                   Time.deltaTime * speed);
         }
     }
 }

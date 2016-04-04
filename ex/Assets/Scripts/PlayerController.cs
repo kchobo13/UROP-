@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 	void Update()
 	{
 		rb.position += transform.forward * speed;
+
 	}
 
 
