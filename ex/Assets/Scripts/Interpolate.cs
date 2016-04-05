@@ -11,7 +11,8 @@ public class Interpolate : MonoBehaviour
     public bool in_room = true;
     public bool switch_cam;
     bool start_smooth;
-    public float error;
+    private float error = 0.01f;
+    private float angleError = 1.0f;
 
     Vector3 velocity = Vector3.zero;
 
@@ -21,7 +22,8 @@ public class Interpolate : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
+
         if (switch_cam)
         {
             if (!in_room)
@@ -36,13 +38,14 @@ public class Interpolate : MonoBehaviour
 
                     transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
                                                                    pointA.transform.rotation,
-                                                                   Time.deltaTime * speed);
+                                                                   smoothTime);
 
-                    if ((transform.position - pointA.transform.position).magnitude <= error)
+                    if ((transform.position - pointA.transform.position).magnitude <= error &&
+                        (Quaternion.Angle(transform.rotation, pointA.transform.rotation) <= angleError))
                     {
                         start_smooth = !start_smooth;
-                        in_room = !in_room;
                         switch_cam = !switch_cam;
+                        in_room = !in_room;
                     }
                 }
             }
@@ -51,16 +54,21 @@ public class Interpolate : MonoBehaviour
                 start_smooth = true;
                 if (start_smooth)
                 {
-                    transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref velocity, smoothTime);
+                    transform.position = Vector3.SmoothDamp(transform.position, 
+                                                            player.transform.position, 
+                                                            ref velocity, 
+                                                            smoothTime);
+
                     transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
                                                                    player.transform.rotation,
-                                                                   Time.deltaTime * speed);
+                                                                   smoothTime);
 
-                    if ((transform.position - player.transform.position).magnitude <= error)
+                    if ((transform.position - player.transform.position).magnitude <= error &&
+                        (Quaternion.Angle(transform.rotation, player.transform.rotation) <= angleError))
                     {
                         start_smooth = !start_smooth;
-                        in_room = !in_room;
                         switch_cam = !switch_cam;
+                        in_room = !in_room;
                     }
                 }
 
@@ -71,7 +79,7 @@ public class Interpolate : MonoBehaviour
         {
             transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
                                                                    player.transform.rotation,
-                                                                   Time.deltaTime * speed);
+                                                                   0.5f);
         }
     }
 }
