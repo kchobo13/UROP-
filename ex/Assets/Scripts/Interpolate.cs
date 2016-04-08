@@ -23,7 +23,6 @@ public class Interpolate : MonoBehaviour
 
     void Update()
     { 
-
         if (switch_cam)
         {
             if (!in_room)

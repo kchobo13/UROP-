@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.VR;
 
 
 public class PlayerController : MonoBehaviour {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public int count;
     public Text countText;
     public GameObject main;
+	public GameObject vr;
     
 
     void Start()
@@ -34,6 +36,18 @@ public class PlayerController : MonoBehaviour {
         {
             rb.position += transform.forward * speed;
         }
+
+		var turn = vr.transform.eulerAngles.y;
+
+		if (turn > 5.0f && turn < 90.0f) 
+		{
+			transform.Rotate(0, 0.5f * Time.deltaTime * clockwise, 0);
+		}
+
+		if (turn < 355.0f && turn > 185.0f) 
+		{
+			transform.Rotate(0, 0.5f * Time.deltaTime * counterClockwise, 0);
+		}
 	}
 
 
