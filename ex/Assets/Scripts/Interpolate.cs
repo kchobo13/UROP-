@@ -19,6 +19,7 @@ public class Interpolate : MonoBehaviour
     void Start()
     {
         pointA.transform.position = transform.position;
+		pointA.transform.rotation = transform.rotation;
     }
 
     void Update()

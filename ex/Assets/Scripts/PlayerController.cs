@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     public Text countText;
     public GameObject main;
 	public GameObject vr;
+	private float smoothv;
     
 
     void Start()
@@ -35,19 +36,19 @@ public class PlayerController : MonoBehaviour {
         if (!inter.switch_cam)
         {
             rb.position += transform.forward * speed;
+			var turn = transform.rotation.y - vr.transform.eulerAngles.y;
+
+			if (turn <= -5.0f && turn >= -120.0f) 
+			{
+				transform.Rotate (0, 0.5f * Time.deltaTime * clockwise, 0);
+			}
+
+			if (turn >= 5.0f || turn < -125.0f) 
+			{
+				transform.Rotate (0, 0.5f * Time.deltaTime * counterClockwise, 0);
+			}
+				
         }
-
-		var turn = vr.transform.eulerAngles.y;
-
-		if (turn > 5.0f && turn < 90.0f) 
-		{
-			transform.Rotate(0, 0.5f * Time.deltaTime * clockwise, 0);
-		}
-
-		if (turn < 355.0f && turn > 185.0f) 
-		{
-			transform.Rotate(0, 0.5f * Time.deltaTime * counterClockwise, 0);
-		}
 	}
 
 
@@ -78,13 +79,6 @@ public class PlayerController : MonoBehaviour {
         {
             inter.switch_cam = true;
         }
-    }
-
-    IEnumerator Stagger(float speed)
-    {
-        speed = 0.0f;
-        yield return new WaitForSeconds(3.0f);
-        speed = 0.5f;
     }
 
     void SetCountText()
