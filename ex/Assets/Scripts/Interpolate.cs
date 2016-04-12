@@ -12,7 +12,7 @@ public class Interpolate : MonoBehaviour
     public bool switch_cam;
     bool start_smooth;
     private float error = 0.01f;
-    private float angleError = 1.0f;
+    private float angleError = 0.1f;
 
     Vector3 velocity = Vector3.zero;
 

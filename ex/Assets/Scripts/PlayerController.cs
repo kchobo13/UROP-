@@ -8,9 +8,9 @@ using UnityEngine.VR;
 public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
-    public float speed = 0.04f;
-	public float clockwise = 150.0f;
-	public float counterClockwise = -150.0f;
+    public float speed;
+	public float room;
+	public float hall;
     public int count;
     public Text countText;
     public GameObject main;
@@ -35,19 +35,38 @@ public class PlayerController : MonoBehaviour {
         Interpolate inter = main.GetComponent<Interpolate>();
         if (!inter.switch_cam)
         {
-            rb.position += transform.forward * speed;
-			var turn = transform.rotation.y - vr.transform.eulerAngles.y;
+			if (inter.in_room) {
+				speed = 0.03f;
+				rb.position += transform.forward * speed;
+				var turn = vr.transform.eulerAngles.y;
 
-			if (turn <= -5.0f && turn >= -120.0f) 
-			{
-				transform.Rotate (0, 0.5f * Time.deltaTime * clockwise, 0);
-			}
+				if (turn >= 5.0f && turn <= 120.0f) 
+				{
+					transform.Rotate (0, 0.5f * Time.deltaTime * room, 0);
+				}
 
-			if (turn >= 5.0f || turn < -125.0f) 
+				if (turn <= 355.0f && turn >= 240.0f) 
+				{
+					transform.Rotate (0, -0.5f * Time.deltaTime * room, 0);
+				}
+			} 
+			else 
 			{
-				transform.Rotate (0, 0.5f * Time.deltaTime * counterClockwise, 0);
+				speed = 0.015f;
+				rb.position += transform.forward * speed;
+				var turn = vr.transform.eulerAngles.y;
+
+				if (turn >= 0.0f && turn <= 150.0f) 
+				{
+					transform.Rotate (0,  0.5f * Time.deltaTime * hall, 0);
+				}
+
+				if (turn <= 360.0f && turn >= 200.0f) {
+					transform.Rotate (0,  -0.5f * Time.deltaTime * hall, 0);
+				}
+
+
 			}
-				
         }
 	}
 
@@ -55,10 +74,10 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
 		if(Input.GetKey(KeyCode.Q)) {
-			transform.Rotate(0, Time.deltaTime * counterClockwise, 0);
+			transform.Rotate(0, -Time.deltaTime * hall, 0);
 		}
 		else if(Input.GetKey(KeyCode.E)) {
-			transform.Rotate(0, Time.deltaTime * clockwise, 0);
+			transform.Rotate(0, Time.deltaTime * hall, 0);
 		}
     }
 
