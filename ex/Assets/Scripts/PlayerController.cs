@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
         {
 			if (inter.in_room) {
 				speed = 0.03f;
-				//rb.position += transform.forward * speed;
+				rb.position += transform.forward * speed;
 				var turn = vr.transform.eulerAngles.y;
 
 				if (turn >= 5.0f && turn <= 120.0f) 
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
 					transform.Rotate (0, 0.5f * Time.deltaTime * room, 0);
 				}
 
-				if (turn <= 355.0f && turn >= 240.0f) 
+				if (turn <= 360.0f && turn >= 240.0f) 
 				{
 					transform.Rotate (0, -0.5f * Time.deltaTime * room, 0);
 				}
@@ -54,16 +54,16 @@ public class PlayerController : MonoBehaviour {
 			else 
 			{
 				speed = 0.015f;
-				//rb.position += transform.forward * speed;
-				var turn = vr.transform.rotation.y;
+				rb.position += transform.forward * speed;
+				var turn = vr.transform.eulerAngles.y;
 
 				if (turn >= 5.0f && turn <= 180.0f) 
 				{
-					transform.Rotate (0,  0.5f * Time.deltaTime * hall, 0);
+					transform.Rotate (0, 0.5f * Time.deltaTime * hall, 0);
 				}
 
 				if (turn < 355.0f && turn > 180.0f) {
-					transform.Rotate (0,  -0.5f * Time.deltaTime * hall, 0);
+					transform.Rotate (0,  -0.5f  * Time.deltaTime * hall, 0);
 				}
 
 
