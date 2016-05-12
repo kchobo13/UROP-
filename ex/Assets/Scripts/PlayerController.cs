@@ -56,17 +56,8 @@ public class PlayerController : MonoBehaviour {
 				speed = 0.015f;
 				rb.position += transform.forward * speed;
 				var turn = vr.transform.eulerAngles.y;
-
-				if (turn >= 5.0f && turn <= 180.0f) 
-				{
-					transform.Rotate (0, 0.5f * Time.deltaTime * hall, 0);
-				}
-
-				if (turn < 355.0f && turn > 180.0f) {
-					transform.Rotate (0,  -0.5f  * Time.deltaTime * hall, 0);
-				}
-
-
+				Vector3 to = new Vector3(0f, turn, 0f); 
+				transform.eulerAngles = Vector3.Slerp(transform.rotation.eulerAngles, to, Time.deltaTime);
 			}
         }
 	}

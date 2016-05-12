@@ -74,12 +74,5 @@ public class Interpolate : MonoBehaviour
 
             }
         }
-
-        if (!in_room)
-        {
-            transform.rotation = Quaternion.SlerpUnclamped(transform.rotation,
-                                                                   player.transform.rotation,
-                                                                   0.5f);
-        }
     }
 }
