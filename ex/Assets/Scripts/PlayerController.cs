@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour {
         {
 			if (inter.in_room) {
 				speed = 0.03f;
+				if (Input.GetMouseButtonDown (0)) {
+					speed = 0;
+				}
 				rb.position += transform.forward * speed;
 				var turn = vr.transform.eulerAngles.y;
 
@@ -54,12 +57,16 @@ public class PlayerController : MonoBehaviour {
 			else 
 			{
 				speed = 0.015f;
+				if (Input.GetMouseButtonDown (0)) {
+					speed = 0;
+				}
 				rb.position += transform.forward * speed;
 				var turn = vr.transform.eulerAngles.y;
-				Vector3 to = new Vector3(0f, turn, 0f); 
+				Vector3 to = new Vector3(0f, turn, 0f);
 				transform.eulerAngles = Vector3.Slerp(transform.rotation.eulerAngles, to, Time.deltaTime);
 			}
         }
+			
 	}
 
 
